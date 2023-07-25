@@ -34,9 +34,9 @@ const updateCar = (param) => {
 }
 
 //删除
-const deleteCar = (param) => {
+const deleteKun = (id) => {
     return new Promise((resolve, reject) => {
-        connection.query("delete from car where id = ?", param, (err, data) => {
+        connection.query("delete from kunkun where id = ?", id, (err, data) => {
             resolve(data)
         })
     })
@@ -46,5 +46,5 @@ module.exports = {
     getKun,
     addKun,
     updateCar,
-    deleteCar
+    deleteKun,
 }

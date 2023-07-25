@@ -21,7 +21,13 @@ const addKun = (req, res) => {
         })
         .catch(() => { })
 };
+const deleteKun = (req, res) => {
+    Kun.deleteKun(req.params.id).then(()=>{
+        res.json(fh.success("删除成功", 204))
+    })
+}
 module.exports = {
     getKunList,
     addKun,
+    deleteKun,
 }

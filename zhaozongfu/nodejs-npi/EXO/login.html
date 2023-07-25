@@ -10,6 +10,7 @@
         * {
             margin: 0;
             padding: 0;
+
         }
 
         #box {
@@ -31,16 +32,21 @@
 
         #box1 {
             width: 85%;
-            height: 100%;
+            height: 600px;
             padding: 20px;
             position: relative;
-            background-color: rgb(74, 161, 149);
+            background: url("https://w.wallhaven.cc/full/rr/wallhaven-rrj5ow.jpg") no-repeat 0 0/100% 100%;
             left: 0;
             right: 0;
             bottom: 0;
-            top: 100px;
+            top: 20px;
             margin: auto;
             border-radius: 25px;
+            overflow: scroll;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
         }
 
         input,
@@ -57,6 +63,7 @@
             left: 0;
             right: 0;
             border-color: white;
+            color: aliceblue;
             margin: auto;
             border-collapse: collapse;
         }
@@ -72,14 +79,15 @@
         <h5 style="text-align: center;">添加</h5>
         汽车名字:<input id="car_name" type="text"><br>
         汽车颜色:<input id="car_color" type="color"><br>
-        <input id="sub" type="submit" value="提交">
+        <input id="sub" type="submit" value="提交" style="margin-left: 85px;">
+        <button id="quxiao">取消</button>
     </div>
     <div id="box1">
         <button id="tianjia" style="margin-left: 75px;">添加</button>
         <table border="1">
             <thead>
                 <tr>
-                    <th><input type="checkbox"></th>
+                    <th><input type="checkbox" id="selectAll"></th>
                     <th>id</th>
                     <th>名字</th>
                     <th>颜色</th>
@@ -96,6 +104,9 @@
         $(function () {
             $("#tianjia").on("click", function () {
                 $("#box").css("display", "block")
+            })
+            $("#quxiao").on("click", function () {
+                $("#box").css("display", "none")
             })
             //添加   
             $("#sub").click(function () {
@@ -130,6 +141,19 @@
                 },
             });
         }
+        function del(id) {
+            console.log(id)
+            if (confirm("确认删除吗？")) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "http://127.0.0.1:3000/kunkun/delete/" + id,
+                    dataType: "json",
+                    success: function (data) {
+                        huoqushuju(data)
+                    }
+                })
+            }
+        }
         //渲染页面
         function xuanran(data) {
             let html = "";
@@ -137,13 +161,13 @@
             data.data.forEach((item, index) => {
                 html += `
                 <tr>
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" class="checkbox"></td>
                    <td>${item.id}</td>
                    <td>${item.name}</td>
                    <td>${item.color}</td>
                    <td>${item.created_at}</td>
                    <td>
-                    <button>删除</button>
+                    <button onclick="del(${item.id})">删除</button>
                     <button>修改</button> 
                     <button>查看</button>
                    </td>
@@ -152,6 +176,21 @@
             });
             $("tbody").html(html);
         };
+        $(document).ready(function () {
+            // 全选复选框的点击事件处理程序
+            $('#selectAll').click(function () {
+                $('.checkbox').prop('checked', $(this).prop('checked'));
+            });
+
+            // 选项复选框的点击事件处理程序
+            $('.checkbox').click(function () {
+                if ($('.checkbox:checked').length === $('.checkbox').length) {
+                    $('#selectAll').prop('checked', true);
+                } else {
+                    $('#selectAll').prop('checked', false);
+                }
+            });
+        });
     </script>
 </body>
 
