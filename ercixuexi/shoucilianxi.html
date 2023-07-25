@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./CDN/开发环境.js"></script>
+</head>
+
+<body>
+    <div id="box">{{msg}}
+        单向： <input type="text" v-bind:value="arr"><br>
+        双向： <input type="text" v-model:value="arr2">{{arr2}}
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#box',
+        data: {
+            msg: 'hello vue',
+            arr: '单向绑定',
+            arr2: '双向绑定'
+        }
+    })
+</script>
+
+</html>
