@@ -155,9 +155,8 @@
                 </div>
               </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" id="remember_pwd">
               <input
-                id="che"
                 type="checkbox"
                 name="remember"
                 lay-skin="primary"
@@ -221,15 +220,15 @@
             arr.pwd == field.password &&
             action == field.captcha
           ) {
+            if (field.remember == "on") {
+            localStorage.setItem("account",JSON.stringify(field))
+           }
             window.location.href = "./home.html";
           } else {
             alert("密码、用户名错误或验证码错误");
           }
           return false;
         });
-      });
-      $("#che").on("click", function () {
-        console.log(1111);
       });
       window.addEventListener("load", function () {
         function hideDiv() {
@@ -242,6 +241,13 @@
 
         setTimeout(hideDiv, generateRandomTime());
       });
+      // function pitch_state(){
+      //   $("#remember_pwd").on("click", function(){
+      //   let che = $("#remember_pwd input").prop("checked")
+      //   console.log(che);
+      // })
+      // }
+      
     </script>
   </body>
 </html>
