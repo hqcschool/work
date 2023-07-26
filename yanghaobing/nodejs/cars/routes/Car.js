@@ -3,7 +3,7 @@ var router = express.Router();
 var Car = require('../controerll/car')
 
 /* GET users listing. */
-router.get('/', Car.getcarlist);
+router.get('/', Car.getcars);
 //添加汽车
 router.post('/addcar', Car.getaddcar)
 //删除

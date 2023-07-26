@@ -35,7 +35,7 @@ const getaddcar = (param) => {
 //改
 const  getupdatacar = (param) => {
   return new Promise((resolve, reject) => {
-    connection.query("update cars set name = ? where id = ?", [param.name,param.id], (err, data) => {
+    connection.query("update cars set name = ?,color= ? where id = ?", [param.name,param.color,param.id], (err, data) => {
       console.log(err);
       //如果err为null则成功
       resolve(data)
@@ -47,7 +47,7 @@ const  getupdatacar = (param) => {
 const getdelete = (param) => {
   return new Promise((resolve, reject) => {
     connection.query("delete from cars where id = ?", [param.id], (err, data) => {
-      console.log(err);
+    
       resolve(data)
     })
   })

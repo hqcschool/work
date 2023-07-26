@@ -1,9 +1,9 @@
 const carApi=require("../mysql/Cars_api")
 const ret = require("./return")
-const getcarlist = ((req,res)=>{
-
+const getcars = ((req,res)=>{
+  
  carApi.getcars().then((data)=>{
-    res.json(ret.success("获取汽车信息成功","200"));
+    res.json(ret.success("获取汽车信息成功","200",data));
  },
  (err)=>{res.json(ret.Error(err,500));
  })
@@ -26,7 +26,8 @@ let body = req.body
 const getdelete=(req,res)=>{
 let body = req.body
 let del ={
-   id:body.id
+   id:body.id,
+   name:body.name,
 }
 
  carApi.getdelete(del)
@@ -39,6 +40,7 @@ const getupdatacar=(req,res)=>{
   let body = req.body
   let up = {
     name:body.name,
+    color:body.color,
     id:body.id,
     
   }
@@ -49,7 +51,7 @@ const getupdatacar=(req,res)=>{
   }).catch(()=>{})
 }
 module.exports = {
-  getcarlist,
+  getcars,
   getaddcar,
   getdelete,
   getupdatacar,
