@@ -131,16 +131,14 @@
         function huoqushuju() {
             $.ajax({
                 url: 'http://127.0.0.1:3000/kunkun',
-                data: {
-                    name: "zhoujielun",
-                    age: 38
-                },
+               
                 success: function (data) {
                     console.log(data);
                     xuanran(data)
                 },
             });
         }
+        //删除
         function del(id) {
             console.log(id)
             if (confirm("确认删除吗？")) {
@@ -149,7 +147,7 @@
                     url: "http://127.0.0.1:3000/kunkun/delete/" + id,
                     dataType: "json",
                     success: function (data) {
-                        huoqushuju(data)
+                        huoqushuju(data);
                     }
                 })
             }
