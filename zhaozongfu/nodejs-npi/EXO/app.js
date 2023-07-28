@@ -7,7 +7,7 @@ var logger = require('morgan');
 const bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var kunRouter = require('./routes/kunRoute')
+var kunRouter = require('./routes/kunRoute');
 
 var app = express();
 //设置跨域访问

@@ -76,12 +76,16 @@
 
 <body>
     <div id='box'>
-        <h5 style="text-align: center;">添加</h5>
-        汽车名字:<input id="car_name" type="text"><br>
-        汽车颜色:<input id="car_color" type="color"><br>
-        <input id="sub" type="submit" value="提交" style="margin-left: 85px;">
-        <button id="quxiao">取消</button>
+        <form action="">
+            <h5 style="text-align: center;">添加</h5>
+            汽车名字:<input id="car_name" type="text"><br>
+            汽车颜色:<input id="car_color" type="color"><br>
+            <input id="sub" type="submit" value="提交" style="margin-left: 85px;">
+            <button id="quxiao">取消</button>
+        </form>
     </div>
+
+
     <div id="box1">
         <button id="tianjia" style="margin-left: 75px;">添加</button>
         <table border="1">
@@ -100,7 +104,8 @@
     </div>
 
     <script>
-
+        let tadata = [],
+            thisIndex;
         $(function () {
             $("#tianjia").on("click", function () {
                 $("#box").css("display", "block")
@@ -131,16 +136,14 @@
         function huoqushuju() {
             $.ajax({
                 url: 'http://127.0.0.1:3000/kunkun',
-                data: {
-                    name: "zhoujielun",
-                    age: 38
-                },
+
                 success: function (data) {
                     console.log(data);
                     xuanran(data)
                 },
             });
         }
+        //删除
         function del(id) {
             console.log(id)
             if (confirm("确认删除吗？")) {
@@ -149,10 +152,18 @@
                     url: "http://127.0.0.1:3000/kunkun/delete/" + id,
                     dataType: "json",
                     success: function (data) {
-                        huoqushuju(data)
+                        huoqushuju(data);
                     }
                 })
             }
+        }
+        function chakan(id) {
+            console.log(id);
+            let data = {
+                car_name: $("#car name").val(),
+                car_color: $("#car_color").val()
+            }
+            $("#box").css("display", "block")
         }
         //渲染页面
         function xuanran(data) {
@@ -169,7 +180,7 @@
                    <td>
                     <button onclick="del(${item.id})">删除</button>
                     <button>修改</button> 
-                    <button>查看</button>
+                    <button onclick="chakan(${item.id})">查看</button>
                    </td>
                 </tr>
                 `

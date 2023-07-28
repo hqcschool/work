@@ -23,16 +23,6 @@ const addKun = (param) => {
             })
     })
 }
-//改
-const updateCar = (param) => {
-    return new Promise((resolve, reject) => {
-        connection.query("update car set username = ? where phone = ?", param, (err, data) => {
-            //如果err为null则成功
-            resolve(data)
-        })
-    })
-}
-
 //删除
 const deleteKun = (id) => {
     return new Promise((resolve, reject) => {
@@ -45,6 +35,5 @@ const deleteKun = (id) => {
 module.exports = {
     getKun,
     addKun,
-    updateCar,
     deleteKun,
 }
